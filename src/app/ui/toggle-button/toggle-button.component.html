@@ -1,0 +1,16 @@
+<button
+  class="left"
+  [ngClass]="{ active: active }"
+  type="button"
+  (click)="handleClick(button.Left)"
+>
+  <i class="fa-solid fa-table-list"></i>
+</button>
+<button
+  class="right"
+  [ngClass]="{ active: !active }"
+  type="button"
+  (click)="handleClick(button.Right)"
+>
+  <i class="fa-solid fa-table-cells"></i>
+</button>

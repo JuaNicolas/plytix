@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { CreateUser, Department, User } from '../modal/types';
+import { CreateUser, Department, EditUser, User } from '../modal/types';
 
 import { UsersService } from './users.service';
 
@@ -9,7 +9,7 @@ import {
 } from '@angular/common/http/testing';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { combineLatest, map, take } from 'rxjs';
+import { combineLatest, map, mergeMap, take } from 'rxjs';
 
 describe('UsersService', () => {
   let service: UsersService;
@@ -49,9 +49,7 @@ describe('UsersService', () => {
         );
 
       // AddUser should have made one request to POST
-      const req = httpTestingController.expectOne(
-        'http://localhost:3000/users'
-      );
+      const req = httpTestingController.expectOne(environment.url);
       expect(req.request.method).toEqual('POST');
       expect(req.request.body).toEqual(fakeUser);
 
@@ -72,21 +70,36 @@ describe('UsersService', () => {
       expect(spy).toHaveBeenCalledWith(fakeUser);
     });
 
-    xit('If a user is edited, it should exist the new version only', () => {
-      const fakeUser: User = {
-        id: 2,
-        name: 'James Brown',
-        email: 'brown@gmail.com',
-        department: Department.Development,
+    it('If a user is edited it should exist the new version only', () => {
+      const spy = spyOn(service, 'editUser').and.callThrough();
+
+      const modifiedUser: User = {
+        id: 1,
+        name: 'Nick Jonas',
+        email: 'jonas@gmail.com',
+        department: Department.Marketing,
       };
-      service.addUser(fakeUser);
-      fakeUser.department = Department.Marketing;
-      service.editUser(fakeUser);
-      service.users$.subscribe((list: User[]) => {
-        expect(list).toContain(fakeUser);
-        expect(list).toHaveSize(1);
-        expect(list[0].department).not.toBe(Department.Development);
+
+      service
+        .editUser(modifiedUser)
+        .subscribe((newUser) => expect(newUser).toEqual(modifiedUser));
+
+      // AddUser should have made one request to PATCH
+      const req = httpTestingController.expectOne(
+        `${environment.url}/${modifiedUser.id}`
+      );
+      expect(req.request.method).toEqual('PATCH');
+      expect(req.request.body).toEqual(modifiedUser);
+
+      // Expect server to return the User after POST
+      const expectedResponse = new HttpResponse({
+        status: 200,
+        statusText: 'OK',
+        body: modifiedUser,
       });
+      req.event(expectedResponse);
+
+      expect(spy).toHaveBeenCalledWith(modifiedUser);
     });
 
     xit('If a user is deleted, it should not exist', () => {

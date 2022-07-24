@@ -1,0 +1,49 @@
+@mixin pillStyle($color) {
+  background-color: $color;
+  box-shadow: rgba($color, 75%) 0px 3px 20px 0px,
+    rgba($color, 90%) 0px 2px 20px -6px;
+}
+
+mat-card {
+  max-width: 200px;
+  text-align: center;
+  border: 0.2px solid rgba(#717171, 0.25);
+  .image-wrapper {
+    position: relative;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .pill {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 5px 20px;
+      border-radius: 20px;
+      color: white;
+      letter-spacing: 1px;
+
+      &.green {
+        @include pillStyle(#58dcad);
+      }
+      &.purple {
+        @include pillStyle(#9775e5);
+      }
+      &.blue {
+        @include pillStyle(#66a5ed);
+      }
+      &.orange {
+        @include pillStyle(#f0b065);
+      }
+    }
+  }
+
+  h3 {
+    margin: 10px auto 0;
+    font-size: 24px;
+    font-weight: 600;
+  }
+}

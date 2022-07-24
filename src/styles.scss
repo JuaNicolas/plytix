@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/theming";
+$custom-typography: mat-typography-config(
+  $font-family: "'Arvo', serif",
+);
+@include mat-core($custom-typography);
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+}

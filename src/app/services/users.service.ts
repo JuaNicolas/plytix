@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CreateUser, User } from '../modal/types';
-import { tap } from 'rxjs/operators';
+import { CreateUser, DeleteUser, EditUser, User } from '../modal/types';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +13,13 @@ export class UsersService {
   readonly users$ = this._users.asObservable();
   constructor(private readonly httpClient: HttpClient) {}
 
+  getUsers(): Observable<User[]> {
+    return this.httpClient.get<User[]>(environment.url).pipe(
+      catchError(() => of([])),
+      tap((users) => this._users.next(users))
+    );
+  }
+
   addUser(user: CreateUser): Observable<User> {
     const previousUsers = this._users.value;
     return this.httpClient
@@ -20,7 +27,7 @@ export class UsersService {
       .pipe(tap((user) => this._users.next([...previousUsers, user])));
   }
 
-  editUser(user: User): Observable<User> {
+  editUser(user: EditUser): Observable<User> {
     return this.httpClient
       .patch<User>(`${environment.url}/${user.id}`, user)
       .pipe(
@@ -33,8 +40,14 @@ export class UsersService {
       );
   }
 
-  deleteUser(id: number) {
-    const previousUsersFiltered = this._users.value.filter((u) => u.id !== id);
-    this._users.next([...previousUsersFiltered]);
+  deleteUser(user: DeleteUser): Observable<null> {
+    return this.httpClient.delete<null>(`${environment.url}/${user.id}`).pipe(
+      tap(() => {
+        const previousUsersFiltered = this._users.value.filter(
+          (u) => u.id !== user.id
+        );
+        this._users.next([...previousUsersFiltered]);
+      })
+    );
   }
 }

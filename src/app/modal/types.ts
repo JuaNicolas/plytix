@@ -7,14 +7,15 @@ export interface BaseUser {
   name: string;
   email: string;
   department: Department;
+  created: string;
 }
 
 export interface User extends BaseUser {
-  id: string;
+  id: number;
 }
 
 export interface CreateUser extends BaseUser {}
 export interface EditUser extends User {}
 export interface DeleteUser {
-  id: string;
+  id: number;
 }

@@ -19,3 +19,21 @@ export interface EditUser extends User {}
 export interface DeleteUser {
   id: number;
 }
+export enum PillColor {
+  Green = 'green',
+  Purple = 'purple',
+  Blue = 'blue',
+  Orange = 'orange',
+}
+
+export enum Expertise {
+  Experienced = 'Experienced',
+  Advanced = 'Advanced',
+  Senior = 'Senior',
+  Expert = 'Expert',
+}
+
+export interface Pill {
+  color: PillColor;
+  expertise: Expertise;
+}

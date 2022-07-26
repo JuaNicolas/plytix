@@ -1,0 +1,27 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <h1 mat-dialog-title>{{ isDisabled ? "Remove" : "Add" }} row</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput type="text" formControlName="name" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>E-mail</mat-label>
+      <input matInput type="email" formControlName="email" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Department</mat-label>
+      <mat-select formControlName="department">
+        <mat-option *ngFor="let department of departments" [value]="department">
+          {{ department }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button type="submit" [disabled]="form.invalid">
+      {{ isDisabled ? "Remove" : "Save" }}
+    </button>
+  </div>
+</form>

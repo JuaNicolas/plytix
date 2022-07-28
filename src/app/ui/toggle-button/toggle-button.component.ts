@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 export enum Button {
   Left,
@@ -11,6 +11,7 @@ export enum Button {
   styleUrls: ['./toggle-button.component.scss'],
 })
 export class ToggleButtonComponent implements OnInit {
+  @Output() display = new EventEmitter<Button>();
   constructor() {}
 
   active = true;
@@ -20,5 +21,6 @@ export class ToggleButtonComponent implements OnInit {
 
   handleClick(button: Button) {
     this.active = !button;
+    this.display.emit(button);
   }
 }

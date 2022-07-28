@@ -1,0 +1,11 @@
+<h1>{{ department }}</h1>
+
+<mat-form-field appearance="outline">
+  <input #search matInput type="text" placeholder="Search" />
+</mat-form-field>
+
+<div class="list-container">
+  <ng-container *ngFor="let user of usersCopy">
+    <app-card [user]="user"></app-card>
+  </ng-container>
+</div>

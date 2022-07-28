@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CreateUser, Department, User } from 'src/app/models/types';
+import { CreateUser, Department } from 'src/app/models/types';
 import { ControlsOf } from 'src/app/validators/form-controlsof.type';
 import { FormValidators } from 'src/app/validators/form-validators';
+import { UserRow } from '../table/table.component';
 
 @Component({
   selector: 'app-modal',
@@ -19,7 +20,7 @@ export class ModalComponent implements OnInit {
   constructor(
     private readonly fb: NonNullableFormBuilder,
     public dialogRef: MatDialogRef<ModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data?: User
+    @Inject(MAT_DIALOG_DATA) public data?: UserRow
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +51,10 @@ export class ModalComponent implements OnInit {
   }
 
   onSubmit(): void {
+    if (this.isDisabled) {
+      this.dialogRef.close(this.data?.id);
+      return;
+    }
     const { name, email, department } = this.form.getRawValue();
     const payload: CreateUser = {
       name,
@@ -58,7 +63,6 @@ export class ModalComponent implements OnInit {
       created: new Date().toISOString(),
     };
 
-    console.log(payload);
     this.dialogRef.close(payload);
   }
 }

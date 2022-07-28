@@ -1,0 +1,64 @@
+table {
+  width: 100%;
+}
+table,
+td {
+  border: 1px solid #3b3b3b;
+  border-collapse: collapse;
+}
+
+.table--header {
+  background-color: #3b3b3b;
+  color: white;
+  text-transform: uppercase;
+  padding: 0 15px;
+  font-weight: 600;
+  &:not(:last-of-type) {
+    border-right: 1px solid white;
+  }
+}
+
+.table--cell {
+  height: 80px;
+
+  span {
+    padding-left: 16px;
+    padding-top: 8px;
+  }
+
+  &:nth-child(1) {
+    width: 25%;
+  }
+  &:nth-child(2) {
+    width: auto;
+  }
+  &:nth-child(3) {
+    width: 25%;
+  }
+  &:nth-child(4) {
+    width: 15%;
+    div {
+      justify-content: center;
+    }
+  }
+  div {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.check {
+  color: #4fba92;
+}
+.cancel {
+  color: #be382b;
+}
+
+:host ::ng-deep .mat-form-field-wrapper {
+  padding: 0;
+  width: 100%;
+}
+:host ::ng-deep .mat-form-field {
+  width: calc(100% - 10px);
+  margin: 0 auto;
+}

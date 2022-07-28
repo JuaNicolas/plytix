@@ -14,7 +14,7 @@ const COLUMNS_SCHEMA = [
   {
     key: 'email',
     type: 'email',
-    label: 'Email',
+    label: 'E-mail',
   },
   {
     key: 'department',
@@ -57,10 +57,15 @@ export class TableComponent implements OnInit {
   }
 
   removeRow(user: UserRow): void {
-    this.modal
-      .open<ModalComponent, UserRow, number>(ModalComponent, {
+    const dialog = this.modal.open<ModalComponent, UserRow, number>(
+      ModalComponent,
+      {
         data: user,
-      })
+      }
+    );
+    dialog.afterOpened().subscribe(() => (this.users = [...this.usersCopy]));
+
+    dialog
       .afterClosed()
       .pipe(
         filter(Boolean),

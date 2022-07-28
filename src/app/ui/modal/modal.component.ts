@@ -1,10 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CreateUser, Department } from 'src/app/models/types';
+import { CreateUser, Department, UserRow } from 'src/app/models/types';
 import { ControlsOf } from 'src/app/validators/form-controlsof.type';
 import { FormValidators } from 'src/app/validators/form-validators';
-import { UserRow } from '../table/table.component';
 
 @Component({
   selector: 'app-modal',

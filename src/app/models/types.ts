@@ -37,3 +37,7 @@ export interface Pill {
   color: PillColor;
   expertise: Expertise;
 }
+
+export interface UserRow extends User {
+  isEditable: boolean;
+}

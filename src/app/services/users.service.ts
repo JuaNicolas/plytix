@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CreateUser, DeleteUser, EditUser, User } from '../modal/types';
+import { CreateUser, DeleteUser, EditUser, User } from '../models/types';
 import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -11,7 +11,9 @@ import { catchError, tap } from 'rxjs/operators';
 export class UsersService {
   private readonly _users = new BehaviorSubject<User[]>([]);
   readonly users$ = this._users.asObservable();
-  constructor(private readonly httpClient: HttpClient) {}
+  constructor(private readonly httpClient: HttpClient) {
+    this.getUsers().subscribe();
+  }
 
   getUsers(): Observable<User[]> {
     return this.httpClient.get<User[]>(environment.url).pipe(

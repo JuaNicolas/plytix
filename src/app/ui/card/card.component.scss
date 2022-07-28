@@ -4,10 +4,14 @@
     rgba($color, 90%) 0px 2px 20px -6px;
 }
 
-mat-card {
+:host {
+  min-width: 150px;
+  width: calc((100% - 60px) / 3);
   max-width: 200px;
+  min-height: 250px;
   text-align: center;
-  border: 0.2px solid rgba(#717171, 0.25);
+  margin: 10px 10px 10px 0;
+  border: 1px solid rgba(#717171, 0.25);
   .image-wrapper {
     position: relative;
     img {
@@ -45,5 +49,8 @@ mat-card {
     margin: 10px auto 0;
     font-size: 24px;
     font-weight: 600;
+  }
+  p {
+    word-break: break-word;
   }
 }

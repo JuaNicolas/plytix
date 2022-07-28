@@ -1,13 +1,15 @@
 <mat-card class="mat-elevation-z">
   <div class="image-wrapper">
-    <img src="assets/image.webp" alt="Background image" />
+    <img mat-card-sm-image src="assets/image.webp" alt="Background image" />
     <ng-container *ngIf="user | pill as pill">
       <div class="pill" [ngClass]="pill.color">{{ pill.expertise }}</div>
     </ng-container>
   </div>
 
-  <mat-card-content>
+  <mat-card-title>
     <h3>{{ user.name }}</h3>
+  </mat-card-title>
+  <mat-card-content>
     <p>{{ user.email }}</p>
   </mat-card-content>
 </mat-card>

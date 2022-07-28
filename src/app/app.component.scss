@@ -1,0 +1,67 @@
+:host {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-auto-rows: auto;
+  padding: 50px 0;
+}
+
+.add {
+  border-radius: 20px;
+  background-color: #4fba92;
+  color: white;
+  border: none;
+  font-weight: 600;
+  padding: 10px 20px;
+}
+
+.container {
+  grid-column: 2/3;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.users-list {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  background-color: white;
+  border-radius: 10px;
+  padding: 50px;
+  grid-gap: 40px;
+
+  div {
+    background-color: #717171;
+    height: 100%;
+    width: 1px;
+  }
+}
+
+@media (min-width: 576px) {
+  :host {
+    grid-template-columns: auto 540px auto;
+  }
+}
+@media (min-width: 768px) {
+  :host {
+    grid-template-columns: auto 720px auto;
+  }
+}
+@media (min-width: 992px) {
+  :host {
+    grid-template-columns: auto 960px auto;
+  }
+}
+@media (min-width: 1200px) {
+  :host {
+    grid-template-columns: auto 1140px auto;
+  }
+}
+@media (min-width: 1400px) {
+  :host {
+    grid-template-columns: auto 1280px auto;
+  }
+}

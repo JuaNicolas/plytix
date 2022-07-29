@@ -13,7 +13,12 @@
       <ng-template #displayFields>
         <div [ngSwitch]="col.type">
           <div class="btn-edit" *ngSwitchCase="'isEdit'">
-            <button mat-button class="check" (click)="confirmChange(element)">
+            <button
+              mat-button
+              class="check"
+              [disabled]="disableEdit"
+              (click)="confirmChange(element)"
+            >
               <mat-icon>check</mat-icon>
             </button>
             <button mat-button class="cancel" (click)="cancelChange()">
@@ -21,7 +26,7 @@
             </button>
           </div>
           <mat-form-field *ngSwitchCase="'select'" appearance="outline">
-            <mat-select [(ngModel)]="element[col.key]">
+            <mat-select [(ngModel)]="element[col.key]" required>
               <mat-option
                 *ngFor="let department of departments"
                 [value]="department"
@@ -31,7 +36,13 @@
             </mat-select>
           </mat-form-field>
           <mat-form-field *ngSwitchDefault appearance="outline">
-            <input [type]="col.type" matInput [(ngModel)]="element[col.key]" />
+            <input
+              (ngModelChange)="validateInput($event, col.type)"
+              [type]="col.type"
+              matInput
+              [(ngModel)]="element[col.key]"
+              required
+            />
           </mat-form-field>
         </div>
       </ng-template>

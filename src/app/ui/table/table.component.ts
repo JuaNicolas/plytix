@@ -5,7 +5,11 @@ import { Department, User, UserRow } from 'src/app/models/types';
 import { UsersService } from 'src/app/services/users.service';
 import { ModalComponent } from '../modal/modal.component';
 
-const COLUMNS_SCHEMA = [
+const COLUMNS_SCHEMA: {
+  key: string;
+  type: 'text' | 'select' | 'email' | 'isEdit';
+  label: string;
+}[] = [
   {
     key: 'name',
     type: 'text',
@@ -40,6 +44,8 @@ export class TableComponent implements OnInit {
   users: UserRow[] = [];
   private usersCopy: UserRow[] = [];
 
+  disableEdit = false;
+
   constructor(
     private readonly usersService: UsersService,
     private readonly modal: MatDialog
@@ -53,14 +59,33 @@ export class TableComponent implements OnInit {
       .subscribe((users) => {
         this.users = [...users];
         this.usersCopy = [...users];
+        this.disableEdit = false;
       });
   }
 
+  validateInput(
+    input: string,
+    type: 'text' | 'select' | 'email' | 'isEdit'
+  ): void {
+    if (type === 'email') {
+      this.disableEdit = !new RegExp(
+        String.raw`\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b`
+      ).test(input);
+    }
+
+    if (type === 'text') {
+      this.disableEdit = !new RegExp('^([a-zA-Z]{2,})$').test(input);
+    }
+  }
+
   removeRow(user: UserRow): void {
-    const dialog = this.modal.open<ModalComponent, UserRow, number>(
+    const dialog = this.modal.open<ModalComponent, UserRow, UserRow>(
       ModalComponent,
       {
         data: user,
+        panelClass: 'custom-dialog-container',
+        minWidth: 320,
+        width: '700px',
       }
     );
     dialog.afterOpened().subscribe(() => (this.users = [...this.usersCopy]));
@@ -69,7 +94,7 @@ export class TableComponent implements OnInit {
       .afterClosed()
       .pipe(
         filter(Boolean),
-        mergeMap((id) => this.usersService.deleteUser({ id }))
+        mergeMap(({ id }) => this.usersService.deleteUser({ id }))
       )
       .subscribe();
   }
@@ -87,5 +112,6 @@ export class TableComponent implements OnInit {
 
   cancelChange(): void {
     this.users = [...this.usersCopy];
+    this.disableEdit = false;
   }
 }

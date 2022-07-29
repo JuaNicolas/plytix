@@ -50,10 +50,6 @@ export class ModalComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.isDisabled) {
-      this.dialogRef.close(this.data?.id);
-      return;
-    }
     const { name, email, department } = this.form.getRawValue();
     const payload: CreateUser = {
       name,

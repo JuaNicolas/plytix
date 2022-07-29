@@ -28,9 +28,6 @@
 .users-list {
   display: grid;
   grid-template-columns: 1fr 1px 1fr;
-  background-color: white;
-  border-radius: 10px;
-  padding: 50px;
   grid-gap: 40px;
 
   div {
@@ -38,6 +35,13 @@
     height: 100%;
     width: 1px;
   }
+}
+
+.users-list,
+.users-table {
+  background-color: white;
+  border-radius: 10px;
+  padding: 50px;
 }
 
 @media (min-width: 576px) {

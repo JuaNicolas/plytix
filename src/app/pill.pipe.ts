@@ -10,21 +10,23 @@ export class PillPipe implements PipeTransform {
   transform(user: User): Pill {
     const userDate = dayjs(user.created);
     const today = dayjs();
-    const difference = today.diff(userDate, 'd');
+    const difference = today.diff(userDate, 'h', true);
 
-    if (difference > 3) {
+    if (difference >= 72) {
       return {
         color: PillColor.Orange,
         expertise: Expertise.Expert,
       };
     }
-    if (difference >= 2) {
+
+    if (72 > difference && difference >= 48) {
       return {
         color: PillColor.Purple,
         expertise: Expertise.Senior,
       };
     }
-    if (difference >= 1) {
+
+    if (48 > difference && difference >= 24) {
       return {
         color: PillColor.Blue,
         expertise: Expertise.Advanced,

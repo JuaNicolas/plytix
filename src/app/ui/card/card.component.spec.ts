@@ -1,26 +1,43 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material/card';
-
+import { PillPipe } from 'src/app/pill.pipe';
 import { CardComponent } from './card.component';
 
+@Component({
+  selector: `app-host-component`,
+  template: `<app-card
+    [user]="{
+      id: 1,
+      name: 'Nicolas',
+      email: 'email@gmail.com',
+      department: 'Development',
+      created: '2022-07-25'
+    }"
+  ></app-card>`,
+})
+class TestHostComponent {
+  @ViewChild(CardComponent, { static: true })
+  public cardComponent!: CardComponent;
+}
+
 describe('CardComponent', () => {
-  let component: CardComponent;
-  let fixture: ComponentFixture<CardComponent>;
+  let testHostComponent: TestHostComponent;
+  let testHostFixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CardComponent],
+      declarations: [CardComponent, PillPipe, TestHostComponent],
       imports: [MatCardModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CardComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    testHostFixture = TestBed.createComponent(TestHostComponent);
+    testHostComponent = testHostFixture.componentInstance;
+    testHostFixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(testHostComponent.cardComponent).toBeTruthy();
   });
 });

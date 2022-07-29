@@ -5,15 +5,11 @@ import {
   Department,
   EditUser,
   User,
-} from '../modal/types';
+} from '../models/types';
 
 import { UsersService } from './users.service';
 
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpResponse,
-} from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import {
   HttpClientTestingModule,
   HttpTestingController,

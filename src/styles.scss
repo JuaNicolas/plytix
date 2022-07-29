@@ -17,3 +17,59 @@ body {
   height: 100vh;
   color: #717171;
 }
+
+.custom-dialog-container .mat-dialog-container {
+  padding: 0;
+  // margin: 0;
+
+  .mat-dialog-title,
+  .mat-dialog-content,
+  .mat-dialog-actions {
+    margin: 0;
+  }
+  .mat-dialog-content,
+  .mat-dialog-actions {
+    padding: 15px 45px;
+  }
+
+  .mat-dialog-title {
+    padding: 50px 45px 15px;
+  }
+  .mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .mat-dialog-actions {
+    background-color: #eeeeee;
+
+    button {
+      border: none;
+      background: none;
+      padding: 10px 20px;
+      font-weight: 600;
+
+      &:hover {
+        background-color: #d3d8d6;
+        border-radius: 20px;
+      }
+
+      &.custom-button {
+        margin-left: 10px;
+        border-radius: 20px;
+        background-color: #be382b;
+        color: white;
+        border: none;
+        font-weight: 600;
+        padding: 10px 20px;
+      }
+
+      &[type="submit"] {
+        background-color: #4fba92;
+
+        &:disabled {
+          background-color: #d3d8d6;
+        }
+      }
+    }
+  }
+}

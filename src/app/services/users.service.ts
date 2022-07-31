@@ -11,9 +11,8 @@ import { catchError, tap } from 'rxjs/operators';
 export class UsersService {
   private readonly _users = new BehaviorSubject<User[]>([]);
   readonly users$ = this._users.asObservable();
-  constructor(private readonly httpClient: HttpClient) {
-    this.getUsers().subscribe();
-  }
+
+  constructor(private readonly httpClient: HttpClient) {}
 
   getUsers(): Observable<User[]> {
     return this.httpClient.get<User[]>(environment.url).pipe(

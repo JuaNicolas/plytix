@@ -72,14 +72,13 @@ describe('UsersService', () => {
     service = TestBed.inject(UsersService);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
+  afterEach(() => httpTestingController.verify());
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
   describe('Store information', () => {
-    afterEach(() => httpTestingController.verify());
-
     describe('Get Users', () => {
       it('The initial value should be an empty list', () => {
         service.users$.subscribe((list: User[]) => expect(list).toEqual([]));

@@ -24,7 +24,9 @@ export class AppComponent {
   constructor(
     private readonly usersService: UsersService,
     private readonly modal: MatDialog
-  ) {}
+  ) {
+    usersService.getUsers().subscribe();
+  }
 
   handleDisplay(event: Button): void {
     this.display = !event;

@@ -34,6 +34,7 @@ describe('AppComponent', () => {
       'UsersService',
       {
         addUser: of(),
+        getUsers: of(mockUsers),
       },
       {
         users$: of(mockUsers),

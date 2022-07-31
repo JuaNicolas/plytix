@@ -88,7 +88,6 @@ export class TableComponent implements OnInit {
         width: '700px',
       }
     );
-    dialog.afterOpened().subscribe(() => (this.users = [...this.usersCopy]));
 
     dialog
       .afterClosed()
@@ -113,5 +112,12 @@ export class TableComponent implements OnInit {
   cancelChange(): void {
     this.users = [...this.usersCopy];
     this.disableEdit = false;
+  }
+
+  clickedRows(user: UserRow): void {
+    this.users = this.usersCopy.map((u) => ({
+      ...u,
+      isEditable: user.id === u.id,
+    }));
   }
 }

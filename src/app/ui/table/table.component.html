@@ -1,6 +1,11 @@
 <table mat-table [dataSource]="users">
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: displayedColumns"
+    (click)="clickedRows(row)"
+    [ngClass]="{ 'active-row': row.isEditable }"
+  ></tr>
 
   <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
     <th mat-header-cell *matHeaderCellDef class="table--header">

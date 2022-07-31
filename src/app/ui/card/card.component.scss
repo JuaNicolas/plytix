@@ -1,8 +1,4 @@
-@mixin pillStyle($color) {
-  background-color: $color;
-  box-shadow: rgba($color, 75%) 0px 3px 20px 0px,
-    rgba($color, 90%) 0px 2px 20px -6px;
-}
+@import "src/assets/styles/_variables";
 
 :host {
   min-width: 150px;
@@ -11,7 +7,7 @@
   min-height: 250px;
   text-align: center;
   margin: 10px 10px 10px 0;
-  border: 1px solid rgba(#717171, 0.25);
+  border: 1px solid rgba($text-color, 0.25);
   .image-wrapper {
     position: relative;
     img {
@@ -31,16 +27,16 @@
       letter-spacing: 1px;
 
       &.green {
-        @include pillStyle(#58dcad);
+        @include pillStyle($green-pill);
       }
       &.purple {
-        @include pillStyle(#9775e5);
+        @include pillStyle($purple-pill);
       }
       &.blue {
-        @include pillStyle(#66a5ed);
+        @include pillStyle($blue-pill);
       }
       &.orange {
-        @include pillStyle(#f0b065);
+        @include pillStyle($orange-pill);
       }
     }
   }
@@ -55,6 +51,6 @@
   }
   h3,
   p {
-    color: #717171;
+    color: $text-color;
   }
 }

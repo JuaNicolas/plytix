@@ -1,0 +1,16 @@
+$corporate-green: #4fba92;
+$corporate-disabled: #d3d8d6;
+$corporate-background: #eeeeee;
+$text-color: #717171;
+$corporate-red: #be382b;
+$green-pill: #58dcad;
+$purple-pill: #9775e5;
+$blue-pill: #66a5ed;
+$orange-pill: #f0b065;
+$grey: #3b3b3b;
+
+@mixin pillStyle($color) {
+  background-color: $color;
+  box-shadow: rgba($color, 75%) 0px 3px 20px 0px,
+    rgba($color, 90%) 0px 2px 20px -6px;
+}

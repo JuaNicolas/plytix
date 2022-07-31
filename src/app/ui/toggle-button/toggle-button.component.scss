@@ -1,18 +1,10 @@
+@import "src/assets/styles/_variables";
+
 :host {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-$corporate-green: #4fba92;
-$corporate-disabled: #d3d8d6;
-$corporate-background: #eeeeee;
-$text-color: #717171;
-$corporate-red: #be382b;
-$green-pill: #58dcad;
-$purple-pill: #9775e5;
-$blue-pill: #66a5ed;
-$orange-pill: #f0b065;
 
 button {
   width: 50px;

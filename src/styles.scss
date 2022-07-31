@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import "src/assets/styles/_variables";
 
 @import "~@angular/material/theming";
 $custom-typography: mat-typography-config(
@@ -12,10 +13,10 @@ body {
 }
 body {
   margin: 0;
-  background-color: #eeeeee;
+  background-color: $corporate-background;
   width: 100vw;
   height: 100vh;
-  color: #717171;
+  color: $text-color;
 }
 
 .custom-dialog-container .mat-dialog-container {
@@ -40,7 +41,7 @@ body {
     flex-direction: column;
   }
   .mat-dialog-actions {
-    background-color: #eeeeee;
+    background-color: $corporate-background;
 
     button {
       border: none;
@@ -49,14 +50,14 @@ body {
       font-weight: 600;
 
       &:hover {
-        background-color: #d3d8d6;
+        background-color: $corporate-disabled;
         border-radius: 20px;
       }
 
       &.custom-button {
         margin-left: 10px;
         border-radius: 20px;
-        background-color: #be382b;
+        background-color: $corporate-red;
         color: white;
         border: none;
         font-weight: 600;
@@ -64,10 +65,10 @@ body {
       }
 
       &[type="submit"] {
-        background-color: #4fba92;
+        background-color: $corporate-green;
 
         &:disabled {
-          background-color: #d3d8d6;
+          background-color: $corporate-disabled;
         }
       }
     }

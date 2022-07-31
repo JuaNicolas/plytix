@@ -1,14 +1,16 @@
+@import "src/assets/styles/_variables";
+
 table {
   width: 100%;
 }
 table,
 td {
-  border: 1px solid #3b3b3b;
+  border: 1px solid $grey;
   border-collapse: collapse;
 }
 
 .table--header {
-  background-color: #3b3b3b;
+  background-color: $grey;
   color: white;
   text-transform: uppercase;
   padding: 0 15px;
@@ -16,6 +18,10 @@ td {
   &:not(:last-of-type) {
     border-right: 1px solid white;
   }
+}
+
+.active-row {
+  background-color: $corporate-background;
 }
 
 .table--cell {
@@ -48,17 +54,21 @@ td {
 }
 
 .check {
-  color: #4fba92;
+  color: $corporate-green;
 }
 .cancel {
-  color: #be382b;
+  color: $corporate-red;
 }
 
 :host ::ng-deep .mat-form-field-wrapper {
   padding: 0;
   width: 100%;
+  background-color: white;
+  border-radius: 8px;
 }
+
 :host ::ng-deep .mat-form-field {
+  color: $text-color;
   width: calc(100% - 10px);
   margin: 0 auto;
 }

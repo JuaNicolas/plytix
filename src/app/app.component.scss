@@ -7,7 +7,7 @@
 
 .add {
   border-radius: 20px;
-  background-color: #4fba92;
+  background-color: $corporate-green;
   color: white;
   border: none;
   font-weight: 600;
@@ -31,7 +31,7 @@
   grid-gap: 40px;
 
   div {
-    background-color: #717171;
+    background-color: $text-color;
     height: 100%;
     width: 1px;
   }
